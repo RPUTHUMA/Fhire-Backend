@@ -1,10 +1,12 @@
+.PHONY: pip db install lint run test gunicorn black
+
 pip:
 	PIP_CONFIG_FILE=$(PWD)/pip.conf \
 	pip install -e .
 	PIP_CONFIG_FILE=$(PWD)/pip.conf \
 	pip install pytest pytest-cov black importanize pre-commit
 
-install: pip 
+install: pip
 	pre-commit install
 
 run:
@@ -35,3 +37,9 @@ db:
 db-init:
 	FHIRE_SETTINGS=$(PWD)/configs/local.ini \
 	alembic init alembic
+
+lint:
+	cd mainapp && python ../lint.py mainapp
+
+black:
+	python -m black mainapp

@@ -24,6 +24,7 @@ setup(
         "psycopg2-binary",
         "Flask-Migrate==2.5.2",
         "alembic==1.0.11",
+        "black"
     ],
     scripts=["bin/mlod"],
 )

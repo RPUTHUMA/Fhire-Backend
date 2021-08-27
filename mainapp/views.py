@@ -1,11 +1,9 @@
-import os
-import io
-
+# -*- coding: utf-8 -*-
 from flasgger import swag_from
 from flask.views import MethodView
-from flask import Flask,Blueprint,request,render_template,jsonify
 from datetime import datetime
 from flask import Response, g, json, jsonify, request, send_file, send_from_directory
+from . import models, schemas
 
 # pylint: disable=no-self-use, unused-variable
 class PingView(MethodView):
@@ -30,7 +28,6 @@ class UserView(MethodView):
         g.db_session.add(ml_model)
         g.db_session.commit()
         return "Pong"
-
 
     @swag_from("swag/fetch_user.yaml")
     @debug
