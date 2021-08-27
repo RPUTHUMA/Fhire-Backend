@@ -34,11 +34,7 @@ def simple(env, resp):
     return [b"Please re-verify the URL. Check if context path is present"]
 
 
-application.before_request_funcs = {
-    None: [
-        db_session
-    ]
-}
+application.before_request_funcs = {None: [db_session]}
 
 # this is defining the app with context path
 application.wsgi_app = DispatcherMiddleware(
@@ -70,7 +66,8 @@ swagger_config = {
 
 swag = Swagger(application, config=swagger_config, template=swagger_template)
 
-#register apis
+
+# register apis
 application.add_url_rule(
     "/v1/ping",
     view_func=PingView.as_view("Ping"),

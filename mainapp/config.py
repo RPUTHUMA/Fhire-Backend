@@ -5,7 +5,7 @@ import os
 
 # pylint: disable=invalid-name
 config_file = os.getenv(
-    "FHIRE_SETTINGS", "/Users/deveshsurve/PycharmProjects/pythonProject/MLDetectionApp/FlaskApp_Backend/configs/local.ini"
+    "FHIRE_SETTINGS", "/usr/local/opt/mosaic-ai-backend/configs/local.ini"
 )
 
 
