@@ -6,10 +6,17 @@ from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
+from werkzeug.exceptions import InternalServerError
+from marshmallow import ValidationError
 
 from .config import config
-from .views import PingView, UserView, ValidateView
+from .views import PingView, UserView, ValidateView, JobDescription
 from .utils import create_db_config
+from .middlewares import authentication, request_middleware
+from .error_handlers import (
+    internal_server_error,
+    schema_validation_error,
+)
 
 
 # pylint: disable=invalid-name, too-many-format-args
@@ -34,12 +41,22 @@ def simple(env, resp):
     return [b"Please re-verify the URL. Check if context path is present"]
 
 
-application.before_request_funcs = {None: [db_session]}
+# register request middleware
+application.before_request_funcs = {None: [db_session, authentication, request_middleware]}
+
 
 # this is defining the app with context path
 application.wsgi_app = DispatcherMiddleware(
     simple, {config.get("flask", "base_url"): application.wsgi_app}
 )
+
+# register error handlers
+application.error_handler_spec = {
+    None: {
+        None: {ValidationError: schema_validation_error},
+        500: {InternalServerError: internal_server_error},
+    }
+}
 
 swagger_template = {
     "swagger": "2.0",
@@ -80,6 +97,11 @@ application.add_url_rule(
 )
 application.add_url_rule(
     "/v1/validate_user/<string:user_id>",
-    view_func=ValidateView.as_view("validate_rc"),
-    methods=["POST"],
+    view_func=ValidateView.as_view("validate_r"),
+    methods=["GET"],
+)
+application.add_url_rule(
+    "/v1/create_jd",
+    view_func=JobDescription.as_view("Job_rc"),
+    methods=["POST","GET"],
 )

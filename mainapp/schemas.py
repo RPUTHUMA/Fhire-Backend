@@ -36,3 +36,15 @@ class UsersSchema(schema.Schema, SchemaMixin):
         required=True, error_messages={"required": "password is required"}
     )
     user_type = fields.Str()
+
+class JobDescriptionSchema(schema.Schema, SchemaMixin):
+    """Schema for Job Description"""
+    designation = fields.Str()
+    experience = fields.Str()
+    skill = fields.Str()
+    role = fields.Str()
+    jd = fields.Str()
+    created_by = fields.Str()
+    created_on = fields.DateTime(dump_only=True)
+    last_modified_by = fields.Str()
+    last_modified_on = fields.DateTime(dump_only=True)

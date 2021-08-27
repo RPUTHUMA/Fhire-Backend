@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -27,10 +28,10 @@ from mainapp import config as fhire_config
 
 config.set_main_option("sqlalchemy.url", fhire_config.get("database", "url"))
 
-from mainapp.models import Users
-
+from mainapp.models import Users, JobDescription
 target_metadata = [
-    Users.metadata
+    Users.metadata,
+    JobDescription.metadata,
 ]
 
 

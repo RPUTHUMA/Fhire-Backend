@@ -13,7 +13,7 @@ parameters:
     required: true
     description: Id of user
     type: string
-  - in: formData
+  - in: query
     name: password
     type: string
     required: true
