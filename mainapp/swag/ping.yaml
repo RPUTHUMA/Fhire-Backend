@@ -1,0 +1,9 @@
+API to ping and check health
+---
+tags:
+  - Ping
+consumes:
+  - application/json
+responses:
+  "200":
+    description: OK
