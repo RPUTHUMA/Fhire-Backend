@@ -1,0 +1,27 @@
+API to create a model
+---
+tags:
+  - User
+parameters:
+  - in: body
+    name: data
+    schema:
+      $ref: '#/definitions/CreateUser'
+responses:
+  201:
+    description: Successfully created user
+    schema:
+      $ref: '#/definitions/CreateUser'
+definitions:
+  CreateUser:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email_id:
+        type: string
+      password:
+        type: string
+      user_type:
+        type: string

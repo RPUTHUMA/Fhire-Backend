@@ -28,6 +28,7 @@ from mainapp import config as fhire_config
 config.set_main_option("sqlalchemy.url", fhire_config.get("database", "url"))
 
 from mainapp.models import Users
+
 target_metadata = [
     Users.metadata
 ]
@@ -63,6 +64,7 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
+
     # this callback is used to prevent an auto-migration from being generated
     # when there are no changes to the schema
     # reference: http://alembic.zzzcomputing.com/en/latest/cookbook.html
@@ -91,7 +93,6 @@ def run_migrations_online():
             context.run_migrations()
     finally:
         connection.close()
-
 
 
 if context.is_offline_mode():

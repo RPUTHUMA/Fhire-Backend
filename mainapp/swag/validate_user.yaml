@@ -1,0 +1,19 @@
+API to validate user id and password
+---
+tags:
+  - User
+consumes:
+  - application/json
+responses:
+  "200":
+    description: OK
+parameters:
+  - name: user_id
+    in: path
+    required: true
+    description: Id of user
+    type: string
+  - in: formData
+    name: password
+    type: string
+    required: true

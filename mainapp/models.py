@@ -19,8 +19,9 @@ class ModelMixin:
 
 
 class Users(Base, ModelMixin):
-    __tablename__ = "users"
-    name = sa.Column(sa.String(100))
-    sa.Column("name", sa.String(100), nullable=False)
-    sa.Column("password", sa.String(100))
-    sa.Column("type", sa.String(20))
+    __tablename__ = 'users'
+    sa.Column("id", sa.String(100), primary_key=True)
+    sa.Column("first_name", sa.String(100), nullable=False)
+    sa.Column("last_name", sa.String(100))
+    sa.Column("password", sa.String(200))
+    sa.Column("user_type", sa.String(10))

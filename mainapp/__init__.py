@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """MLOD backend module"""
 from flasgger import Swagger
-from flask import Flask
+from flask import Flask, g
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
 
 from .config import config
-from .views import PingView
+from .views import PingView, UserView
 from .utils import create_db_config
 
 
@@ -74,12 +74,12 @@ application.add_url_rule(
     methods=["GET"],
 )
 application.add_url_rule(
-    "/v1/ping",
-    view_func=PingView.as_view("Ping"),
+    "/v1/create_user",
+    view_func=UserView.as_view("User_rc"),
     methods=["POST"],
 )
 application.add_url_rule(
-    "/v1/ping",
-    view_func=PingView.as_view("Ping"),
+    "/v1/validate_user/<string:user_id>",
+    view_func=UserView.as_view("User_lc"),
     methods=["GET"],
 )

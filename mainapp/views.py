@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from flasgger import swag_from
 from flask.views import MethodView
+from flask import Flask, Blueprint, request, render_template, jsonify, g
 from datetime import datetime
 from flask import Response, g, json, jsonify, request, send_file, send_from_directory
 from . import models, schemas
+
 
 # pylint: disable=no-self-use, unused-variable
 class PingView(MethodView):
@@ -21,6 +23,9 @@ class UserView(MethodView):
     @swag_from("swag/create_user.yaml")
     def post(self):
         """Post method to create a user"""
+        import pdb;pdb.set_trace()
+        payload = request.json
+
         data, errors = schema.load(payload)
         data["type"] = MLType.model
         # save data
@@ -29,8 +34,7 @@ class UserView(MethodView):
         g.db_session.commit()
         return "Pong"
 
-    @swag_from("swag/fetch_user.yaml")
-    @debug
+    @swag_from("swag/validate_user.yaml")
     def get(self, user_id=None):
         """Get method to get the details of user"""
         return "Pong"
