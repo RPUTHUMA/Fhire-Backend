@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """Schemas for Fhire backend views"""
 from marshmallow import ValidationError, fields, schema
-from mosaic_utils.ai.encoding_utils import base64_decode, fix_padding
-
 
 class BytesField(fields.Field):
     """Bytes Field class"""
@@ -25,10 +23,16 @@ class SchemaMixin:
 
 class UsersSchema(schema.Schema, SchemaMixin):
     """Schema for User Login information"""
-    name = fields.Str(
+    first_name = fields.Str(
+        required=True, error_messages={"required": "name is required"}
+    )
+    last_name = fields.Str(
+        required=True, error_messages={"required": "name is required"}
+    )
+    email_id = fields.Str(
         required=True, error_messages={"required": "name is required"}
     )
     password = fields.Str(
         required=True, error_messages={"required": "password is required"}
     )
-    type = fields.Str()
+    user_type = fields.Str()

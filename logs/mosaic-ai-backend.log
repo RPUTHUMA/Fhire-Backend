@@ -1,0 +1,25 @@
+2021-08-28 00:23:22,425 - [ERROR] - None - None - exceptions must derive from BaseException
+Traceback (most recent call last):
+  File "/Users/deveshsurve/PycharmProjects/Fhire-Backend/mainapp/views.py", line 35, in post
+    raise "Email Id already exists"
+TypeError: exceptions must derive from BaseException
+2021-08-28 00:45:47,610 - [ERROR] - None - None - name 'payload' is not defined
+Traceback (most recent call last):
+  File "/Users/deveshsurve/PycharmProjects/Fhire-Backend/mainapp/views.py", line 54, in post
+    email_id = (g.db_session.query(Users).filter(Users.email_id == payload['email_id'])).all()
+NameError: name 'payload' is not defined
+2021-08-28 00:48:02,636 - [ERROR] - None - None - name 'payload' is not defined
+Traceback (most recent call last):
+  File "/Users/deveshsurve/PycharmProjects/Fhire-Backend/mainapp/views.py", line 54, in post
+    password = request.form
+NameError: name 'payload' is not defined
+2021-08-28 00:51:41,386 - [ERROR] - None - None - name 'payload' is not defined
+Traceback (most recent call last):
+  File "/Users/deveshsurve/PycharmProjects/Fhire-Backend/mainapp/views.py", line 54, in post
+    password = request.form
+NameError: name 'payload' is not defined
+2021-08-28 00:54:10,807 - [ERROR] - None - None - name 'payload' is not defined
+Traceback (most recent call last):
+  File "/Users/deveshsurve/PycharmProjects/Fhire-Backend/mainapp/views.py", line 54, in post
+    password = request.form
+NameError: name 'payload' is not defined

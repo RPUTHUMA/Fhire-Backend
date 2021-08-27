@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """empty message
 
 Revision ID: d06da34eade6
@@ -22,6 +23,7 @@ def upgrade():
         sa.Column("first_name", sa.String(100), nullable=False),
         sa.Column("last_name", sa.String(100)),
         sa.Column("password", sa.String(200)),
+        sa.Column("email_id", sa.String(200)),
         sa.Column("user_type", sa.String(10))
     )
 

@@ -8,7 +8,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 
 from .config import config
-from .views import PingView, UserView
+from .views import PingView, UserView, ValidateView
 from .utils import create_db_config
 
 
@@ -80,6 +80,6 @@ application.add_url_rule(
 )
 application.add_url_rule(
     "/v1/validate_user/<string:user_id>",
-    view_func=UserView.as_view("User_lc"),
-    methods=["GET"],
+    view_func=ValidateView.as_view("validate_rc"),
+    methods=["POST"],
 )
