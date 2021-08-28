@@ -30,3 +30,13 @@ class CreateJobDescriptionException(FhireException):
 
     code = 500
     message = "Unable to create Job Description. Please try after some time"
+
+
+class JobFetchException(FhireException):
+    """
+    class JobFetchException(FhireException):
+     inherited from FhireException to raise Job Fetchexception
+    """
+
+    code = 500
+    message = "Unable to fetch Job Description. Please try after some time"

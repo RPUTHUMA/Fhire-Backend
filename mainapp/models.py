@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
 from flask import g
-from .utils import uuid_generator
+from .utils import uuid_generator, default_status
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
@@ -45,3 +45,4 @@ class JobDescription(Base, ModelMixin):
     last_modified_on = sa.Column(
         sa.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
+    status = sa.Column(sa.String(50), nullable=False, default=default_status())

@@ -32,6 +32,7 @@ def upgrade():
         sa.Column("created_on", sa.DateTime),
         sa.Column("last_modified_by", sa.String(100)),
         sa.Column("last_modified_on", sa.DateTime),
+        sa.Column("status", sa.String(50), nullable=False),
     )
 
 def downgrade():

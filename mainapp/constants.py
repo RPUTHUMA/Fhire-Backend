@@ -9,3 +9,9 @@ class Headers:
     access_control_allow_origin = "Access-Control-Allow-Origin"
     access_control_allow_methods = "Access-Control-Allow-Methods"
     access_control_allow_headers = "Access-Control-Allow-Headers"
+
+class Status:
+    """status constants"""
+
+    active = "active"
+    inactive = "inactive"

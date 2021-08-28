@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from uuid import uuid4
 from .config import config
-
+from .log import debug, logger as log
 
 def uuid_generator():
     """Method to generate uuid"""
     _uuid = uuid4()
     return str(_uuid)
 
-
+@debug
 def create_db_config(application):
     """creates database configuration"""
     application.config["SQLALCHEMY_DATABASE_URI"] = config.get("database", "url")
@@ -31,6 +31,7 @@ def create_db_config(application):
     application.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     return application
 
+@debug
 def response_handler(message, status, status_code, data=None):
     """ response handler function to generate json response"""
     response = {"message": message, "status": status}
@@ -39,3 +40,8 @@ def response_handler(message, status, status_code, data=None):
     if status == "success":
         return response, status_code
     return response, status_code
+
+@debug
+def default_status():
+    """ Default status on creation: active"""
+    return "active"

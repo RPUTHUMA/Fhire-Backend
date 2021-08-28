@@ -8,8 +8,8 @@ from . import models, schemas
 from .schemas import UsersSchema
 from .models import Users
 from .log import debug, logger as log
-from .exceptions import CreateJobDescriptionException
-from .manager import create_jd
+from .exceptions import CreateJobDescriptionException, JobFetchException
+from .manager import create_jd, get_job_by_id
 
 
 # pylint: disable=no-self-use, unused-variable
@@ -80,3 +80,14 @@ class JobDescription(MethodView):
         except Exception as ex:
             log.exception(ex)
             raise CreateJobDescriptionException
+
+    @swag_from("swag/read_all_jd.yaml")
+    @debug
+    def get(self, job_id=None):
+        """Get method to fetch  job description"""
+        try:
+            response, status_code = get_job_by_id(job_id)
+            return jsonify(response), status_code
+        except Exception as ex:
+            log.exception(ex)
+            raise JobFetchException
