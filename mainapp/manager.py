@@ -48,6 +48,7 @@ def get_job_by_id(job_id=None):
         fhire_job = (
             g.db_session.query(models.JobDescription)
             .filter(models.JobDescription.id == job_id)
+            .filter(models.JobDescription.created_by == g.useremail)
             .filter(models.JobDescription.status == Status.active)
             .first()
         )
@@ -58,6 +59,7 @@ def get_job_by_id(job_id=None):
         # query data
         fhire_job = (
             g.db_session.query(models.JobDescription)
+            .filter(models.JobDescription.created_by == g.useremail)
             .filter(models.JobDescription.status == Status.active)
             .all()
         )
