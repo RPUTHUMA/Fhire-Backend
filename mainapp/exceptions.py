@@ -60,3 +60,13 @@ class JobDeleteException(FhireException):
 
     code = 500
     message = "Unable to delete Job Description. Please try after some time"
+
+
+class ForgetPasswordException(FhireException):
+    """
+    class ForgetPasswordException(FhireException):
+     inherited from FhireException to raise ForgetPasswordException
+    """
+
+    code = 500
+    message = "Unable to update the new password Please try after some time"

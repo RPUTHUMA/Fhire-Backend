@@ -10,7 +10,7 @@ from werkzeug.exceptions import InternalServerError
 from marshmallow import ValidationError
 
 from .config import config
-from .views import PingView, UserView, ValidateView, JobDescription
+from .views import PingView, UserView, ValidateView, JobDescription, ForgetPasswordView
 from .utils import create_db_config
 from .middlewares import authentication, request_middleware
 from .error_handlers import (
@@ -114,4 +114,9 @@ application.add_url_rule(
     "/v1/job",
     view_func=JobDescription.as_view("Job_r"),
     methods=["GET"],
+)
+application.add_url_rule(
+    "/v1/forgetPassword",
+    view_func=ForgetPasswordView.as_view("Forget_c"),
+    methods=["POST"],
 )

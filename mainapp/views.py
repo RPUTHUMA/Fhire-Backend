@@ -8,8 +8,8 @@ from . import models, schemas
 from .schemas import UsersSchema
 from .models import Users
 from .log import debug, logger as log
-from .exceptions import CreateJobDescriptionException, JobFetchException, JDUpdateException, JobDeleteException
-from .manager import create_jd, get_job_by_id, update_jd, delete_jd
+from .exceptions import CreateJobDescriptionException, JobFetchException, JDUpdateException, JobDeleteException, ForgetPasswordException
+from .manager import create_jd, get_job_by_id, update_jd, delete_jd, forget_password
 
 
 # pylint: disable=no-self-use, unused-variable
@@ -63,6 +63,24 @@ class ValidateView(MethodView):
         except Exception as ex:
             log.exception(ex)
             return "Validation Failed", 500
+
+
+class ForgetPasswordView(MethodView):
+    """Class for handling forget password"""
+
+    @swag_from("swag/forget_password.yaml")
+    def post(self):
+        """post method to forget password"""
+        try:
+            payload = request.json
+            # check forget password
+            response, status_code = forget_password(payload)
+            # send response
+            return jsonify(response), status_code
+        except Exception as ex:
+            log.exception(ex)
+            raise ForgetPasswordException
+
 
 class JobDescription(MethodView):
     """Class for maintaining Job Description"""

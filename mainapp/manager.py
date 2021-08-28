@@ -112,8 +112,35 @@ def delete_jd(job_id):
     g.db_session.query(models.JobDescription).filter(models.JobDescription.id == job_id).update(
         {"status": Status.inactive}
     )
+    g.db_session.commit()
     response, status_code = response_handler(
         "Job Description deleted successfully", "success", 204
     )
+    # send response
+    return response, status_code
+
+@debug
+def forget_password(payload):
+    """
+    Method to validate and update new password
+    :param payload: Dictionary containing
+        user email(Str): email
+        password(Str): password
+    :type payload: JSON
+    :return: response , status code
+    """
+    schema = schemas.UsersSchema(strict=True)
+    # check if email already exists
+    email_id = (g.db_session.query(models.Users).filter(models.Users.email_id == payload['email_id'])).all()
+    if len(email_id) > 0:
+        g.db_session.query(models.Users).filter(models.Users.email_id == payload['email_id']).update({"password": payload['password']})
+        g.db_session.commit()
+        response, status_code = response_handler(
+            "Password updated successfully", "Success", 201
+        )
+    else:
+        response, status_code = response_handler(
+            "Email Id does not exist, Please verify", "Failed", 200
+        )
     # send response
     return response, status_code
