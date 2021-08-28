@@ -1,0 +1,31 @@
+API to create a job description
+---
+tags:
+  - JobDescription
+parameters:
+  - in: header
+    name: X-Auth-Email
+    required: true
+    type: string
+  - in: body
+    name: data
+    schema:
+      $ref: '#/definitions/CreateJD'
+responses:
+  201:
+    description: Successfully created Job Description
+    schema:
+      $ref: '#/definitions/CreateJD'
+definitions:
+  CreateJD:
+    properties:
+      designation:
+        type: string
+      experience:
+        type: string
+      skill:
+        type: string
+      role:
+        type: string
+      jd:
+        type: string

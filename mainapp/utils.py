@@ -30,3 +30,12 @@ def create_db_config(application):
     )
     application.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     return application
+
+def response_handler(message, status, status_code, data=None):
+    """ response handler function to generate json response"""
+    response = {"message": message, "status": status}
+    if data is not None:
+        response["data"] = data
+    if status == "success":
+        return response, status_code
+    return response, status_code

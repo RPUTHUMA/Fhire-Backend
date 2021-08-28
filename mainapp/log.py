@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""mosaic ai logs module"""
+"""fhire logs module"""
+
 import logging
 import sys
 from logging.handlers import RotatingFileHandler
@@ -36,13 +37,13 @@ stream_handler.setFormatter(formatter)
 
 
 # define logger
-logger = logging.getLogger("mosaic-ai-backend")
+logger = logging.getLogger("fhire-backend")
 logger.setLevel(log_level)
 
 # add handlers
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
-extra = {"project_id": None, "request_id": None}
+extra = {"request_id": None}
 logger = logging.LoggerAdapter(logger, extra)
 
 
@@ -51,7 +52,6 @@ def debug(fn):
     def wrapper(*args, **kwargs):
         """wrapper for debug"""
         args_specs = locals()
-        project_id = None
         request_id = None
         result = None
         if "fn" in args_specs:
@@ -63,18 +63,13 @@ def debug(fn):
                     request.get_json(force=True, silent=True) or request.data
                 )
         try:
-            project_id = g.project_id
-        # pylint: disable=broad-except
-        except Exception as e:
-            pass
-        try:
             request_id = g.request_id
         # pylint: disable=broad-except
         except Exception as e:
             pass
         # pylint: disable=redefined-outer-name
-        extra = {"project_id": project_id, "request_id": request_id}
-        logger = logging.getLogger("mosaic-ai-backend")
+        extra = {"request_id": request_id}
+        logger = logging.getLogger("fhire-backend")
         logger = logging.LoggerAdapter(logger, extra)
         logger.debug("Entering {0} - parameters {1}".format(fn.__qualname__, args_specs))
         try:
