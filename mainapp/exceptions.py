@@ -40,3 +40,23 @@ class JobFetchException(FhireException):
 
     code = 500
     message = "Unable to fetch Job Description. Please try after some time"
+
+
+class JDUpdateException(FhireException):
+    """
+    class JDUpdateException(FhireException):
+     inherited from FhireException to raise Job UpdateException
+    """
+
+    code = 500
+    message = "Unable to update Job Description. Please try after some time"
+
+
+class JobDeleteException(FhireException):
+    """
+    class JobDeleteException(FhireException):
+     inherited from FhireException to raise Job DeleteException
+    """
+
+    code = 500
+    message = "Unable to delete Job Description. Please try after some time"

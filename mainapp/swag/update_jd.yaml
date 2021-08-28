@@ -1,0 +1,47 @@
+API to update a Job Description
+---
+tags:
+  - JobDescription
+parameters:
+  - in: header
+    name: X-Auth-Email
+    required: true
+    type: string
+  - in: path
+    name: job_id
+    required: true
+    description: The id of the job to modify
+    type: string
+  - in: body
+    name: data
+    schema:
+      type: object
+      $ref: "#/definitions/JDUpdateRequest"
+responses:
+  200:
+    description: Success
+  400:
+    description: Bad request
+  403:
+    description: Forbidden
+  500:
+    description: Error
+definitions:
+  JDUpdateRequest:
+    type: object
+    properties:
+      designation:
+        type: string
+        description: designation of job
+      experience:
+        type: string
+        description: experience required
+      skill:
+        type: string
+        description: skills required in job
+      role:
+        type: string
+        description: role in job
+      jd:
+        type: string
+        description: jd provided

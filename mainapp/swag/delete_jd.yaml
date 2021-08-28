@@ -1,0 +1,23 @@
+API to delete a Job description
+---
+tags:
+  - JobDescription
+parameters:
+  - in: header
+    name: X-Auth-Email
+    required: true
+    type: string
+  - name: job_id
+    in: path
+    required: true
+    description: The id of the job description to delete
+    type: string
+responses:
+  "204":
+    description: Success
+  400:
+    description: Bad request
+  403:
+    description: Forbidden
+  500:
+    description: Error

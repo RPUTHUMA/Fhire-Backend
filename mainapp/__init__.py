@@ -101,7 +101,17 @@ application.add_url_rule(
     methods=["GET"],
 )
 application.add_url_rule(
+    "/v1/job/<string:job_id>",
+    view_func=JobDescription.as_view("Job_rud"),
+    methods=["GET", "PUT", "DELETE"],
+)
+application.add_url_rule(
     "/v1/create_jd",
-    view_func=JobDescription.as_view("Job_rc"),
-    methods=["POST","GET"],
+    view_func=JobDescription.as_view("Job_c"),
+    methods=["POST"],
+)
+application.add_url_rule(
+    "/v1/job",
+    view_func=JobDescription.as_view("Job_r"),
+    methods=["GET"],
 )

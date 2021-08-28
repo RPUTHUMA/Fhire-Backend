@@ -8,8 +8,8 @@ from . import models, schemas
 from .schemas import UsersSchema
 from .models import Users
 from .log import debug, logger as log
-from .exceptions import CreateJobDescriptionException, JobFetchException
-from .manager import create_jd, get_job_by_id
+from .exceptions import CreateJobDescriptionException, JobFetchException, JDUpdateException, JobDeleteException
+from .manager import create_jd, get_job_by_id, update_jd, delete_jd
 
 
 # pylint: disable=no-self-use, unused-variable
@@ -91,3 +91,30 @@ class JobDescription(MethodView):
         except Exception as ex:
             log.exception(ex)
             raise JobFetchException
+
+    @swag_from("swag/update_jd.yaml")
+    @debug
+    def put(self, job_id=None):
+        """ Job description update method for job id """
+        try:
+            payload = request.json
+            # calling update recipe
+            response, status_code = update_jd(payload, recipe_id)
+            # send response
+            return jsonify(response), status_code
+        except Exception as ex:
+            log.exception(ex)
+            raise JDUpdateException
+
+    @swag_from("swag/delete_jd.yaml")
+    @debug
+    def delete(self, job_id):
+        """ Job description delete method """
+        try:
+            # calling delete jd
+            response, status_code = delete_jd(job_id)
+            # send response
+            return jsonify(response), status_code
+        except Exception as ex:
+            log.exception(ex)
+            raise JobDeleteException
